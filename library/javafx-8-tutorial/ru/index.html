@@ -46,7 +46,7 @@
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" href="/rss" title="code.makery.ch - RSS Feed">
 
-    <meta name="description" content="Этот учебник состоящий из семи частей, введет вас в проектирование, программирование и развертывание приложения Адресной книги, с помощью JavaFX">
+    <meta name="description" content="Этот учебник, состоящий из семи частей, введёт вас в проектирование, программирование и развёртывание приложения Адресной книги, с помощью JavaFX">
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" value="summary">
@@ -54,7 +54,7 @@
     <!-- Open Graph data -->
     <meta property="og:title" content="Учебник по JavaFX 8 (Русский) | code.makery.ch" />
     <meta property="og:type" content="article" />
-    <meta property="og:description" content="Этот учебник состоящий из семи частей, введет вас в проектирование, программирование и развертывание приложения Адресной книги, с помощью JavaFX" />
+    <meta property="og:description" content="Этот учебник, состоящий из семи частей, введёт вас в проектирование, программирование и развёртывание приложения Адресной книги, с помощью JavaFX" />
     <meta property="og:url" content="http://code.makery.ch/library/javafx-8-tutorial/ru/" />
     <meta property="og:image" content="http://code.makery.ch/assets/library/javafx-8-tutorial/addressapp.png" />
     
@@ -130,7 +130,7 @@
       <a href="/library/javafx-8-tutorial/ru/part6/" class="list-group-item">
         Часть 6: Статистическая диаграмма</a>
       <a href="/library/javafx-8-tutorial/ru/part7/" class="list-group-item">
-        Часть 7: Развертывание</a>
+        Часть 7: Развёртывание</a>
   </div>
 </div>
 
@@ -182,7 +182,7 @@
             <h1 class="article-title">Учебник по JavaFX 8 (Русский)</h1>
             <div class="article-date">
   Apr 19, 2014
-  • Updated Dec 04, 2014
+  • Updated Apr 20, 2016
 
 </div>
           </header>
@@ -207,7 +207,7 @@
       <li class=""><a href="/library/javafx-8-tutorial/ru/part6/">
         Часть 6: Статистическая диаграмма</a></li>
       <li class=""><a href="/library/javafx-8-tutorial/ru/part7/">
-        Часть 7: Развертывание</a></li>
+        Часть 7: Развёртывание</a></li>
   </ul>
 </div>
 
@@ -254,37 +254,38 @@
           </aside>
           
           <div class="article-content">
-            <p>В 2012 году я написал очень детальный <a href="http://code.makery.ch/library/javafx-2-tutorial/">учебник по JavaFX 2</a> для моих студентов. Многие люди с разных частей мира прочитали его и дали очень позитивные отзывы о данном материале. Поэтому я решил переписать этот учебник для новой версии JavaFX 8 (об изменениях вы можете почитать здесь - <a href="http://code.makery.ch/blog/update-to-javafx-8-whats-new/" title="Update to JavaFX 8 - What's New">Обновление до JavaFX 8 - Что Нового</a>).</p>
-<p>В этом учебнике я расскажу о проектировании, программировании и развертывании приложения с функциональностью адресной книги. Так будет выглядеть наше приложение в конце разработки:</p>
+            <p>В 2012-м году я написал для своих студентов очень детальный <a href="http://code.makery.ch/library/javafx-2-tutorial/">учебник по JavaFX 2</a>. Его прочитали в разных частях света, и многие люди очень позитивно отозвались о данном материале. Поэтому я решил переписать учебник для новой версии JavaFX 8 (об изменениях вы можете почитать здесь - <a href="http://code.makery.ch/blog/update-to-javafx-8-whats-new/" title="Update to JavaFX 8 - What's New">Обновление до JavaFX 8 - Что Нового</a>).</p>
+<p>В этом учебнике я расскажу о проектировании, программировании и развёртывании приложения с функциональностью адресной книги. Когда мы закончим разработку, наше приложение будет выглядеть так:</p>
 <p><img src="http://code.makery.ch/assets/library/javafx-8-tutorial/addressapp.png" alt="Screenshot AddressApp" title="AdressApp"></p>
-<h2 id="-">Вам предстоит научиться</h2>
+<h2 id="-">Нам предстоит научиться</h2>
 <ul>
-<li>Создавать и запускать JavaFX-проект;</li>
+<li>Создавать и запускать проект JavaFX;</li>
 <li>Использовать приложение Scene Builder для проектирования пользовательского интерфейса;</li>
-<li>Структурировать приложение с помощью патерна MVC;</li>
+<li>Структурировать приложение с помощью шаблона Модель-Представление-Контроллер (MVC);</li>
 <li>Использовать коллекцию <code>ObservableList</code> для автоматического обновления пользовательского интерфейса;</li>
-<li>Использовать компонент <code>TableView</code> и реагировать на выделение ячеек в таблице;</li>
+<li>Использовать компонент <code>TableView</code> и реагировать на выбор ячеек в таблице;</li>
 <li>Создавать пользовательские всплывающие диалоги для редактирования записей в приложении;</li>
 <li>Выполнять проверку пользовательского ввода;</li>
-<li>Изменять дизайн JavaFX-приложения с помощью каскадных таблиц стилей (CSS);</li>
-<li>Хранить данные приложения в виде XML-файла;</li>
-<li>Сохранять последний открытый путь к файлу в пользовательских настройках;</li>
-<li>Создавать JavaFX-диаграммы для отображения статистики;</li>
-<li>Развертывать JavaFX-приложение с помощью процесса нативной упаковки (native package).</li>
+<li>Изменять дизайн приложения JavaFX с помощью каскадных таблиц стилей (CSS);</li>
+<li>Хранить данные приложения в XML-файле;</li>
+<li>Сохранять в настройках пользователя путь к последнему открытому файлу;</li>
+<li>Создавать диаграммы JavaFX для отображения статистики;</li>
+<li>Развёртывать приложение JavaFX в виде нативного пакета (native package).</li>
 </ul>
-<p><strong>Это довольно много!</strong> А это значит, что после изучения данного материала вы будете знать, как создавать сложные приложения с помощью JavaFX.</p>
-<h2 id="-">Как пользоваться этим учебником</h2>
-<p>Есть два варианта использования этого материала:</p>
+<p><strong>Это довольно много!</strong> А это значит, что после изучения данного материала мы будем готовы с помощью JavaFX создавать сложные приложения.</p>
+<h2 id="-">Как пользоваться данным учебником</h2>
+<p>Есть два варианта использования этого учебника:</p>
 <ul>
-<li><strong>учите много</strong>: Создавайте свой JavaFX проект с нуля и постепенно наполняйте его классы и методы кодом.</li>
-<li><strong>учите быстро</strong>: Импортируйте исходники кода для каждой части учебника в вашу среду разработки а потом пытайтесь понять данный материал.</li>
+<li><strong>учите много</strong>: Создавайте с нуля свой проект JavaFX и постепенно наполняйте кодом его классы и методы.</li>
+<li><strong>учите быстро</strong>: Импортируйте в вашу среду разработки исходный код для каждой части учебника, а потом читайте учебник и старайтесь понять код. <em>Этот проект написан для среды разработки Eclipse, но с некоторыми модификациями (это не касается процесса развёртывания), его можно использовать в NetBeans, IntelliJ IDEA и других IDE</em>.</li>
 </ul>
-<p>Я надеюсь, что вы получите удовольствие! Начнем с <a href="/library/javafx-8-tutorial/ru/part1/" title="Part 1: Scene Builder.">Часть 1: Приложение Scene Builder</a>.</p>
+<p>Надеюсь, что, процесс обучения вам понравится! Начнём с <a href="/library/javafx-8-tutorial/ru/part1/" title="Part 1: Scene Builder.">Часть 1: Scene Builder</a>.</p>
 <div class="alert alert-success">
   <strong><i class="fa fa-trophy"></i> Attribution:</strong> Russian translations have been contributed by 
   <ul>
     <li><a href="https://github.com/sobolevstp" class="alert-link">Sobolev Stepan</a></li> 
-    <li><a href="https://github.com/eugenedotru" class="alert-link">Evgen Ishchenko</a></li> 
+    <li><a href="https://github.com/eugenedotru" class="alert-link">Evgen Ishchenko</a></li>
+    <li><a href="https://github.com/leonisx" class="alert-link">Stavila Leonid</a></li>
   </ul>
   Thank you very much!
 </div>
@@ -320,7 +321,7 @@
       <a href="/library/javafx-8-tutorial/ru/part6/" data-toggle="tooltip" title="Часть 6: Статистическая диаграмма">6</a>
       </li>
         <li>
-      <a href="/library/javafx-8-tutorial/ru/part7/" data-toggle="tooltip" title="Часть 7: Развертывание">7</a>
+      <a href="/library/javafx-8-tutorial/ru/part7/" data-toggle="tooltip" title="Часть 7: Развёртывание">7</a>
       </li>
   
       </ul>

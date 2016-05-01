@@ -46,7 +46,7 @@
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" href="/rss" title="code.makery.ch - RSS Feed">
 
-    <meta name="description" content="Реакция на выбор записей в JavaFX TableView. Добавление, редактирование и удаление элементов из таблицы, а так же проверка пользовательского ввода">
+    <meta name="description" content="Реакция на выбор записей в JavaFX TableView. Добавление, изменение и удаление элементов из таблицы, а так же проверка пользовательского ввода">
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" value="summary">
@@ -54,7 +54,7 @@
     <!-- Open Graph data -->
     <meta property="og:title" content="Учебник по JavaFX 8 - Часть 3: Взаимодействие с пользователем | code.makery.ch" />
     <meta property="og:type" content="article" />
-    <meta property="og:description" content="Реакция на выбор записей в JavaFX TableView. Добавление, редактирование и удаление элементов из таблицы, а так же проверка пользовательского ввода" />
+    <meta property="og:description" content="Реакция на выбор записей в JavaFX TableView. Добавление, изменение и удаление элементов из таблицы, а так же проверка пользовательского ввода" />
     <meta property="og:url" content="http://code.makery.ch/library/javafx-8-tutorial/ru/part3/" />
     <meta property="og:image" content="http://code.makery.ch/assets/library/javafx-8-tutorial/part3/addressapp-part3.png" />
     
@@ -130,7 +130,7 @@
       <a href="/library/javafx-8-tutorial/ru/part6/" class="list-group-item">
         Часть 6: Статистическая диаграмма</a>
       <a href="/library/javafx-8-tutorial/ru/part7/" class="list-group-item">
-        Часть 7: Развертывание</a>
+        Часть 7: Развёртывание</a>
   </div>
 </div>
 <div class="panel panel-default sidebar">
@@ -192,7 +192,7 @@
             <h1 class="article-title">Учебник по JavaFX 8 - Часть 3: Взаимодействие с пользователем</h1>
             <div class="article-date">
   Apr 24, 2014
-  • Updated Dec 04, 2014
+  • Updated Apr 21, 2016
 
 </div>
           </header>
@@ -217,7 +217,7 @@
       <li class=""><a href="/library/javafx-8-tutorial/ru/part6/">
         Часть 6: Статистическая диаграмма</a></li>
       <li class=""><a href="/library/javafx-8-tutorial/ru/part7/">
-        Часть 7: Развертывание</a></li>
+        Часть 7: Развёртывание</a></li>
   </ul>
 </div>
 <div class="btn-group sidebar-dropdown">
@@ -272,40 +272,41 @@
           </aside>
           
           <div class="article-content">
-            <p><img src="/assets/library/javafx-8-tutorial/part3/addressapp-part3.png" alt="Учебник по JavaFX 8 - Часть 3: Взаимодействие с пользователем" title="AdressApp"></p>
+            <p><strong>Обновление от 27 августа 2014-го года:</strong> <em>Сейчас используем JDK 8u20 и ControlsFX 8.0.6_20</em></p>
+<p><img src="/assets/library/javafx-8-tutorial/part3/addressapp-part3.png" alt="Учебник по JavaFX 8 - Часть 3: Взаимодействие с пользователем" title="AdressApp"></p>
 <h2 id="-3-">Часть 3: Содержание</h2>
 <ul>
-<li>Реакция на выбор записей в таблице.</li>
-<li>Добавление функциональности к кнопкам <strong>add</strong>, <strong>edit</strong> и <strong>remove</strong>.</li>
-<li>Создание пользовательского диалогового окна для редактирование записей адресной книги.</li>
+<li>Реакция на выбор адресатов в таблице.</li>
+<li>Добавление функциональности кнопкам <strong>add</strong>, <strong>edit</strong> и <strong>remove</strong>.</li>
+<li>Создание диалогового окна для изменения информации об адресатах.</li>
 <li>Проверка пользовательского ввода.</li>
 </ul>
 <hr>
-<h2 id="-">Реакция на выбор записей в таблице</h2>
-<p>Пока мы еще не использовали правую часть нашего приложения. Идея заключается в том, чтобы при выборе записи в таблице отображать детали этой записи в правой части приложения. </p>
-<p>Сначала давайте добавим новый метод в класс <code>PersonOverviewController</code> который поможет нам заполнять текстовые метки данными указанной записи.</p>
-<p>Создайте метод <code>showPersonDetails(Person person)</code>. Пройдитесь по меткам и присвойте им соответствующие значения, взятые из переданной в параметре записи, используя метод <code>setText(...)</code>. Если в качестве параметра передается <code>null</code>, весь текст в метках должен быть очищен.</p>
+<h2 id="-">Реакция на выбор адресатов в таблице</h2>
+<p>Пока мы ещё не использовали правую часть нашего приложения. Идея заключается в том, чтобы при выборе адресата в таблице, в правой части приложения отображать дополнительную информацию об этом адресате. </p>
+<p>Сначала давайте добавим новый метод в класс <code>PersonOverviewController</code>. Он поможет нам заполнять текстовые метки данными указанного адресата (<code>Person</code>).</p>
+<p>Создайте метод <code>showPersonDetails(Person person)</code>. Его код проходится по меткам, и, используя метод <code>setText(...)</code>, присваивает им соответствующие значения, взятые из переданного в параметре объекта Person. Если в качестве параметра передаётся <code>null</code>, то весь текст в метках будет очищен.</p>
 <h5 id="personoverviewcontroller-java">PersonOverviewController.java</h5>
 <pre class="prettyprint lang-java">
 /**
- * Fills all text fields to show details about the person.
- * If the specified person is null, all text fields are cleared.
+ * Заполняет все текстовые поля, отображая подробности об адресате.
+ * Если указанный адресат = null, то все текстовые поля очищаются.
  * 
- * @param person the person or null
+ * @param person — адресат типа Person или null
  */
 private void showPersonDetails(Person person) {
     if (person != null) {
-        // Fill the labels with info from the person object.
+        // Заполняем метки информацией из объекта person.
         firstNameLabel.setText(person.getFirstName());
         lastNameLabel.setText(person.getLastName());
         streetLabel.setText(person.getStreet());
         postalCodeLabel.setText(Integer.toString(person.getPostalCode()));
         cityLabel.setText(person.getCity());
 
-        // TODO: We need a way to convert the birthday into a String! 
+        // TODO: Нам нужен способ для перевода дня рождения в тип String! 
         // birthdayLabel.setText(...);
     } else {
-        // Person is null, remove all the text.
+        // Если Person = null, то убираем весь текст.
         firstNameLabel.setText("");
         lastNameLabel.setText("");
         streetLabel.setText("");
@@ -317,9 +318,9 @@ private void showPersonDetails(Person person) {
 </pre>
 
 
-<h3 id="-">Конвертация дня рождения в строку</h3>
-<p>Обратите внимание, что мы не можем присвоить значение поля <code>birthday</code> тектовой метке, т.к. тип этого значения <code>LocalDate</code> а не <code>String</code>. Для того чтобы это сделать, нам надо переформатировать нашу дату рождения.</p>
-<p>Т.к. мы будем использовать конвертацию типа <code>LocalDate</code> в <code>String</code> и наоборот в нескольких местах, то хорошей практикой считается создание класса-помощника, содержащего статические методы для этой цели. Наш класс-помощник мы назовем <code>DateUtil</code> и разместим его в новый пакет <code>util</code>:</p>
+<h3 id="-">Преобразование дня рождения в строку</h3>
+<p>Обратите внимание, что мы просто так не можем присвоить текстовой метке значение поля <code>birthday</code>, так как тип его значения <code>LocalDate</code> а не <code>String</code>. Для того чтобы это сделать, нам надо сначала отформатировать дату.</p>
+<p>Мы будем преобразовывать тип <code>LocalDate</code> в тип <code>String</code> и обратно в нескольких местах программы, поэтому, хорошей практикой считается создание для этой цели вспомогательного класса, содержащего статические методы. Этот вспомогательный класс мы назовем <code>DateUtil</code> и разместим его в новом пакете <code>ch.makery.address.util</code>:</p>
 <h5 id="dateutil-java">DateUtil.java</h5>
 <pre class="prettyprint lang-java">
 package ch.makery.address.util;
@@ -329,25 +330,25 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Helper functions for handling dates.
+ * Вспомогательные функции для работы с датами.
  * 
  * @author Marco Jakob
  */
 public class DateUtil {
 
-    /** The date pattern that is used for conversion. Change as you wish. */
+    /** Шаблон даты, используемый для преобразования. Можно поменять на свой. */
     private static final String DATE_PATTERN = "dd.MM.yyyy";
 
-    /** The date formatter. */
+    /** Форматировщик даты. */
     private static final DateTimeFormatter DATE_FORMATTER = 
             DateTimeFormatter.ofPattern(DATE_PATTERN);
 
     /**
-     * Returns the given date as a well formatted String. The above defined 
-     * {@link DateUtil#DATE_PATTERN} is used.
+     * Возвращает полученную дату в виде хорошо отформатированной строки.
+     * Используется определённый выше {@link DateUtil#DATE_PATTERN}.
      * 
-     * @param date the date to be returned as a string
-     * @return formatted string
+     * @param date - дата, которая будет возвращена в виде строки
+     * @return отформатированную строку
      */
     public static String format(LocalDate date) {
         if (date == null) {
@@ -357,13 +358,13 @@ public class DateUtil {
     }
 
     /**
-     * Converts a String in the format of the defined {@link DateUtil#DATE_PATTERN} 
-     * to a {@link LocalDate} object.
+     * Преобразует строку, которая отформатирована по правилам
+     * шаблона {@link DateUtil#DATE_PATTERN} в объект {@link LocalDate}.
      * 
-     * Returns null if the String could not be converted.
+     * Возвращает null, если строка не может быть преобразована.
      * 
-     * @param dateString the date as String
-     * @return the date object or null if it could not be converted
+     * @param dateString - дата в виде String
+     * @return объект даты или null, если строка не может быть преобразована
      */
     public static LocalDate parse(String dateString) {
         try {
@@ -374,65 +375,66 @@ public class DateUtil {
     }
 
     /**
-     * Checks the String whether it is a valid date.
+     * Проверяет, является ли строка корректной датой.
      * 
      * @param dateString
-     * @return true if the String is a valid date
+     * @return true, если строка является корректной датой
      */
     public static boolean validDate(String dateString) {
-        // Try to parse the String.
+        // Пытаемся разобрать строку.
         return DateUtil.parse(dateString) != null;
     }
 }
 </pre>
 
 <div class="alert alert-info">
-<strong>Подсказка</strong>: Вы можете изменить формат даты изменяя константу <code>DATE_PATTERN</code>. За всеми возможными форматами смотрите документацию к классу <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html">DateTimeFormatter</a>
+<strong>Подсказка</strong>: формат даты можно поменять, просто изменив константу <code>DATE_PATTERN</code>. Все возможные форматы описаны в документации к классу <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html">DateTimeFormatter</a>
 </div>
 
 
 
 <h4 id="-dateutil">Использование класса DateUtil</h4>
-<p>Теперь нам необходимо использоавть наш новый класс <code>DateUtil</code> в методе <code>showPersonDetails</code> класса <code>PersonOverviewController</code>. Замените метку <em>TODO</em> следующей строкой:</p>
+<p>Теперь мы можем использовать наш новый класс <code>DateUtil</code> в методе <code>showPersonDetails</code> класса <code>PersonOverviewController</code>. Замените комментарий <em>TODO</em> следующей строкой:</p>
 <pre class="prettyprint lang-java">
 birthdayLabel.setText(DateUtil.format(person.getBirthday()));
 </pre>
 
 
-<h3 id="-">Следим за изменением выбора записи в таблице</h3>
-<p>Для получения информации о том, что пользователь выбрал запись в таблице нам необходимо <em>прослушивать изменения</em>.</p>
-<p>Для этого в JavaFX существует интерфейс <code>ChangeListener</code> с одним методом <code>changed(...)</code>. Этот метод имеет три параметра: <code>observable</code>, <code>oldValue</code> и <code>newValue</code>.</p>
-<p>Мы будем создавать интерфейс <code>ChangeListener</code> пользуясь <em>лямбда-выражениями</em> из Java 8. Давайте добавим несколько строчек кода к методу <code>initialize()</code> класса <code>PersonOverviewController</code>. Теперь наш метод выглядит так:</p>
+<h3 id="-">Наблюдение за выбором адресатов в таблице</h3>
+<p>Чтобы знать о том, что пользователь выбрал определённую запись в таблице, нам необходимо <em>прослушивать изменения</em>.</p>
+<p>Для этого в JavaFX существует интерфейс <code>ChangeListener</code> с единственным методом <code>changed(...)</code>. Этот метод имеет три параметра: <code>observable</code>, <code>oldValue</code> и <code>newValue</code>.</p>
+<p>Мы будем реализовывать интерфейс <code>ChangeListener</code> с помощью <em>лямбда-выражений</em> из Java 8. Давайте добавим несколько строчек кода к методу <code>initialize()</code> класса <code>PersonOverviewController</code>. Теперь этот метод выглядит так:</p>
 <h5 id="personoverviewcontroller-java">PersonOverviewController.java</h5>
 <pre class="prettyprint lang-java">
 @FXML
 private void initialize() {
-    // Initialize the person table with the two columns.
+    // Инициализация таблицы адресатов с двумя столбцами.
     firstNameColumn.setCellValueFactory(
             cellData -> cellData.getValue().firstNameProperty());
     lastNameColumn.setCellValueFactory(
             cellData -> cellData.getValue().lastNameProperty());
 
-    // Clear person details.
+    // Очистка дополнительной информации об адресате.
     showPersonDetails(null);
 
-    // Listen for selection changes and show the person details when changed.
+    // Слушаем изменения выбора, и при изменении отображаем
+    // дополнительную информацию об адресате.
     personTable.getSelectionModel().selectedItemProperty().addListener(
             (observable, oldValue, newValue) -> showPersonDetails(newValue));
 }
 </pre>
 
-<p>Если мы передаем <code>null</code> в параметр метода <code>showPersonDetails(...)</code>, то будут стерты все значения меток.</p>
-<p>В строке <code>personTable.getSelectionModel...</code> мы получаем <em>selectedItemProperty</em> таблицы и добавляем к нему слушателя. Когда пользователь выбирает запись в таблице выполняется наше лямбда-выражение. Мы берем только что выбранную запись и передаем ее в метод <code>showPersonDetails(...)</code>.</p>
-<p><strong>Запустите свое приложение</strong> и проверьте отображаются ли детали записи в правой части когда вы выбираете запись из таблицы.</p>
+<p>Если мы передаём в параметр метода <code>showPersonDetails(...)</code> значение <code>null</code>, то все значения меток будут стёрты.</p>
+<p>В строке <code>personTable.getSelectionModel...</code> мы получаем <em>selectedItemProperty</em> таблицы и добавляем к нему слушателя. Когда пользователь выбирает запись в таблице, выполняется наше лямбда-выражение. Мы берём только что выбранную запись и передаём её в метод <code>showPersonDetails(...)</code>.</p>
+<p><strong>Запустите свое приложение</strong> и проверьте, отображаются ли детали адресата в правой части, когда в таблице выбирается определённый адресат.</p>
 <p>Если у вас что-то не работает, то вы можете сравнить свой класс <code>PersonOverviewController</code> с <a href="/assets/library/javafx-8-tutorial/part3/PersonOverviewController.java" title="PersonOverviewController.java">PersonOverviewController.java</a>.</p>
 <hr>
 <h2 id="-delete">Кнопка Delete</h2>
-<p>В нашем интерфейсе пользователя есть кнопка <strong>Delete</strong>, но пока у нее нет функциональности. В приложении Scene Builder мы можем указать на то, какое действие будет выполняться при нажатии на эту кнопку. Любой метод внутри класса-контроллера помеченный аннотацией @FXML (или публичный) доступен приложению Scene Builder. Поэтому, давайте сперва добавим метод удаления записи в конец нашего класса <code>PersonOverviewController</code>, а потом уже назначим его в роли обработчика кнопки <strong>Delete</strong>.</p>
+<p>В нашем пользовательским интерфейсе есть кнопка <strong>Delete</strong>, но пока она не работает. В приложении Scene Builder мы можем задать действие, которое будет выполняться при нажатии на эту кнопку. Любой метод внутри класса-контроллера, помеченный аннотацией @FXML (или публичный), доступен Scene Builder. Поэтому, давайте сперва добавим в конец класса <code>PersonOverviewController</code> метод удаления адресата, а уже потом назначим его обработчиком кнопки <strong>Delete</strong>.</p>
 <h5 id="personoverviewcontroller-java">PersonOverviewController.java</h5>
 <pre class="prettyprint lang-java">
 /**
- * Called when the user clicks on the delete button.
+ * Вызывается, когда пользователь кликает по кнопке удаления.
  */
 @FXML
 private void handleDeletePerson() {
@@ -441,17 +443,21 @@ private void handleDeletePerson() {
 }
 </pre>
 
-<p>Теперь откройте файл <code>PersonOverview.fxml</code> в приложении Scene Builder. Выберите кнопку <strong>Delete</strong>, откройте вкладку <em>Code</em> и проставьте метод <code>handleDeletePerson</code> в значение пункта <em>On Action</em>.  </p>
+<p>Теперь в приложении Scene Builder откройте файл <code>PersonOverview.fxml</code>. Выберите кнопку <strong>Delete</strong>, откройте вкладку <em>Code</em> и укажите метод <code>handleDeletePerson</code> в значение пункта <em>On Action</em>.  </p>
 <p><img src="/assets/library/javafx-8-tutorial/part3/handle-delete.png" alt="On Action" title="Handle Delete"></p>
+<div class="alert alert-info">
+<strong>Помните:</strong> После изменения FXML-файла в Scene Builder, для того, чтобы изменения вступили в силу, вам может понадобится обновить проект в Eclipse.
+</div>
+
 <h3 id="-">Обработка ошибок</h3>
-<p>Если вы сейчас запустите наше приложение, то вы сможете удалять выбранную запись из таблицы. Но что случится, когда вы нажмете кнопку <strong>Delete</strong>, а ни одна запись выбрана не будет?</p>
-<p>Нам выбросит исключение <code>ArrayIndexOutOfBoundsException</code>, потому что мы не можем удалить запись с индексом <code>-1</code>. Индекс <code>-1</code> возвращается методом <code>getSelectedIndex()</code> когда в таблице не выделено ни одной ячейки.</p>
-<p>Конечно, не очень хорошо игнорировать такую ошибку. Поэтому мы должны сообщить пользователю что он, перед тем как нажимать кнопку <strong>Delete</strong>, должен выбрать запись в таблице.</p>
-<p>Добавив некоторые изменения в метод <code>handleDeletePerson</code> мы можем показывать простое диалоговое окно когда пользователь нажимает на кнопку <strong>Delete</strong>, а в таблице ничего не выбрано:</p>
+<p>Если вы сейчас запустите приложение, то уже сможете удалять выбранных адресатов из таблицы. Но что произойдёт, если не будет выбран ни один адресат, а вы нажмёте кнопку <strong>Delete</strong>,?</p>
+<p>Вылетит исключение <code>ArrayIndexOutOfBoundsException</code>, потому что не получится удалить адресата с индексом <code>-1</code>. Значение <code>-1</code> возвращается методом <code>getSelectedIndex()</code>, когда в таблице ничего не выделено.</p>
+<p>Естественно, игнорировать эту ошибку будет некрасиво. Мы должны сообщать пользователю о том, что он, перед тем как нажимать кнопку <strong>Delete</strong>, должен выбрать запись в таблице. (Ещё лучше совсем деактивировать кнопку, чтобы у пользователя не было соблазна сделать что-то не так).</p>
+<p>Добавим в метод <code>handleDeletePerson</code> некоторые изменения. Теперь, когда пользователь нажимает на кнопку <strong>Delete</strong>, а в таблице ничего не выбрано, он увидит простое диалоговое окно:</p>
 <h5 id="personoverviewcontroller-java">PersonOverviewController.java</h5>
 <pre class="prettyprint lang-java">
 /**
- * Called when the user clicks on the delete button.
+ * Вызывается, когда пользователь кликает по кнопке удаления.
  */
 @FXML
 private void handleDeletePerson() {
@@ -459,7 +465,7 @@ private void handleDeletePerson() {
     if (selectedIndex >= 0) {
         personTable.getItems().remove(selectedIndex);
     } else {
-        // Nothing selected.
+        // Ничего не выбрано.
         Alert alert = new Alert(AlertType.WARNING);
         alert.initOwner(mainApp.getPrimaryStage());
         alert.setTitle("No Selection");
@@ -472,22 +478,22 @@ private void handleDeletePerson() {
 </pre>
 
 <div class="alert alert-info">
-Чтобы посмотреть дополнительные примеры использования Диалогов, читайте статью <a href="http://code.makery.ch/blog/javafx-dialogs-official/">Диалоги в JavaFX 8</a>
+Чтобы посмотреть другие примеры использования диалогов, откройте статью в блоге автора учебника <a class="alert-link" href="/blog/javafx-dialogs-official/">Диалоги JavaFX</a>.
 </div>
 
 
 
 <hr>
-<h2 id="-">Диалоги создания и редактирования записей</h2>
-<p>Для реализации методов-обработчиков создания и редактирования записей нам потребуется потрудится немного больше. Нам необходимо создать новое пользовательское окно (сцену) с формой, содержащей поля для заполнения всех деталей записи.</p>
-<h3 id="-">Дизайн Окна Редактирования</h3>
+<h2 id="-">Диалоги создания и изменения адресатов</h2>
+<p>Для реализации методов-обработчиков создания и изменения адресатов нам придётся  потрудится несколько больше. Необходимо создать новое пользовательское окно (то есть сцену) с формой, содержащей поля для заполнения всей необходимой информации об адресате.</p>
+<h3 id="-">Дизайн окна редактирования</h3>
 <ol>
-<li>Создайте новый fxml-файл <code>PersonEditDialog</code> внутри пакета <code>view</code>.<br><img src="/assets/library/javafx-8-tutorial/part3/person-edit-dialog1.png" alt="Create Edit Dialog" title="Person Edit Dialog"></li>
+<li>Внутри пакета <code>view</code> создайте новый fxml-файл <code>PersonEditDialog</code>.<br><img src="/assets/library/javafx-8-tutorial/part3/person-edit-dialog1.png" alt="Create Edit Dialog" title="Person Edit Dialog"></li>
 <li>Используйте компоненты <code>GridPane</code>, <code>Label</code>, <code>TextField</code> и <code>Button</code> для создания окна редактирования, похожего на это:<br><img src="/assets/library/javafx-8-tutorial/part3/person-edit-dialog2.png" alt="Edit Dialog" title="Person Edit Dialog"></li>
 </ol>
-<p><em>Если что-то не работает, вы можете скачайть <a href="/assets/library/javafx-8-tutorial/part3/PersonEditDialog.fxml" title="PersonEditDialog.fxml">PersonEditDialog.fxml</a>.</em></p>
-<h3 id="-">Создание Контроллера</h3>
-<p>Создайте класс-контроллер <code>PersonEditDialogController.java</code>:</p>
+<p><em>Если что-то не работает, вы можете скачать <a href="/assets/library/javafx-8-tutorial/part3/PersonEditDialog.fxml" title="PersonEditDialog.fxml">PersonEditDialog.fxml</a>.</em></p>
+<h3 id="-">Создание контроллера</h3>
+<p>Создайте класс-контроллер для нового окна - <code>PersonEditDialogController.java</code>:</p>
 <h5 id="personeditdialogcontroller-java">PersonEditDialogController.java</h5>
 <pre class="prettyprint lang-java pre-scrollable">
 package ch.makery.address.view;
@@ -501,7 +507,7 @@ import ch.makery.address.model.Person;
 import ch.makery.address.util.DateUtil;
 
 /**
- * Dialog to edit details of a person.
+ * Окно для изменения информации об адресате.
  * 
  * @author Marco Jakob
  */
@@ -526,15 +532,15 @@ public class PersonEditDialogController {
     private boolean okClicked = false;
 
     /**
-     * Initializes the controller class. This method is automatically called
-     * after the fxml file has been loaded.
+     * Инициализирует класс-контроллер. Этот метод вызывается автоматически
+     * после того, как fxml-файл будет загружен.
      */
     @FXML
     private void initialize() {
     }
 
     /**
-     * Sets the stage of this dialog.
+     * Устанавливает сцену для этого окна.
      * 
      * @param dialogStage
      */
@@ -543,7 +549,7 @@ public class PersonEditDialogController {
     }
 
     /**
-     * Sets the person to be edited in the dialog.
+     * Задаёт адресата, информацию о котором будем менять.
      * 
      * @param person
      */
@@ -560,7 +566,7 @@ public class PersonEditDialogController {
     }
 
     /**
-     * Returns true if the user clicked OK, false otherwise.
+     * Returns true, если пользователь кликнул OK, в другом случае false.
      * 
      * @return
      */
@@ -569,7 +575,7 @@ public class PersonEditDialogController {
     }
 
     /**
-     * Called when the user clicks ok.
+     * Вызывается, когда пользователь кликнул по кнопке OK.
      */
     @FXML
     private void handleOk() {
@@ -587,7 +593,7 @@ public class PersonEditDialogController {
     }
 
     /**
-     * Called when the user clicks cancel.
+     * Вызывается, когда пользователь кликнул по кнопке Cancel.
      */
     @FXML
     private void handleCancel() {
@@ -595,9 +601,9 @@ public class PersonEditDialogController {
     }
 
     /**
-     * Validates the user input in the text fields.
+     * Проверяет пользовательский ввод в текстовых полях.
      * 
-     * @return true if the input is valid
+     * @return true, если пользовательский ввод корректен
      */
     private boolean isInputValid() {
         String errorMessage = "";
@@ -615,7 +621,7 @@ public class PersonEditDialogController {
         if (postalCodeField.getText() == null || postalCodeField.getText().length() == 0) {
             errorMessage += "No valid postal code!\n"; 
         } else {
-            // try to parse the postal code into an int.
+            // пытаемся преобразовать почтовый код в int.
             try {
                 Integer.parseInt(postalCodeField.getText());
             } catch (NumberFormatException e) {
@@ -638,7 +644,7 @@ public class PersonEditDialogController {
         if (errorMessage.length() == 0) {
             return true;
         } else {
-            // Show the error message.
+            // Показываем сообщение об ошибке.
             Alert alert = new Alert(AlertType.ERROR);
             alert.initOwner(dialogStage);
             alert.setTitle("Invalid Fields");
@@ -653,40 +659,41 @@ public class PersonEditDialogController {
 }
 </pre>
 
-<p>Некоторые заметки по поводу этого контроллера:</p>
+<p>Кое-какие заметки по поводу этого контроллера:</p>
 <ul>
-<li>Метод <code>setPerson(...)</code> может быть вызван с другого класса для сохранения записи, которая была отредактирована;</li>
-<li>Когда пользователь нажимает на кнопку <strong>ОК</strong>, то вызывается метод <code>handleOK()</code>. Сперва идет проверка введенных пользователем данных постредством вызова метода <code>isInputValid()</code>. Если проверка прошла успешно, идет заполнение записи теми данными, которые ввел пользователь. Эти изменения будут напрямую примняться к записи, принятой в методе <code>setPerson(...)</code>! </li>
-<li>Логическая переменная <code>okClicked</code> используется для определения того, какую из кнопок <code>ОК</code> или <code>Cancel</code> пользователь нажал.</li>
+<li>Для указания адресата, данные которого должны быть изменены, метод <code>setPerson(...)</code> может быть вызван из другого класса;</li>
+<li>Когда пользователь нажимает на кнопку <strong>ОК</strong>, то вызывается метод <code>handleOK()</code>. Первым делом данные, введённые пользователем, проверяются в методе <code>isInputValid()</code>. Если проверка прошла успешно, то объект адресата заполняется данными, которые ввёл пользователь. Эти изменения будут напрямую применяться к объекту адресата, который был передан в качестве аргумента метода <code>setPerson(...)</code>! </li>
+<li>Логическая переменная <code>okClicked</code> служит для определения того, какую из двух кнопок, <code>ОК</code> или <code>Cancel</code> нажал пользователь.</li>
 </ul>
 <h3 id="-fxml-">Привязка класса-контроллера к fxml-файлу</h3>
-<p>Для работоспособности нашей программы мы должны связать вместе наш класс-контроллер с fxml-файлом. Для этого выполните следующие действия:</p>
+<p>Теперь мы должны связать наш класс-контроллер с fxml-файлом. Для этого выполните следующие действия:</p>
 <ol>
-<li>Откройте файл <code>PersonEditDialog.fxml</code> в приложении Scene Builder;</li>
-<li>С левой стороны во вкладке <em>Controller</em> установите наш класс <code>PersonEditDialogController</code> как значение параметра <em>Сontroller Сlass</em>;</li>
-<li>Установине соответствующие значения параметра <strong>fx:id</strong> для всех компонентов <code>TextField</code>;</li>
-<li>Установите значение параметра <strong>onAction</strong> для наших кнопок и присвойте им соответствующие методы-обработчики.</li>
+<li>Откройте файл <code>PersonEditDialog.fxml</code> в Scene Builder;</li>
+<li>С левой стороны во вкладке <em>Controller</em> установите наш класс <code>PersonEditDialogController</code> в качестве значения параметра <em>Сontroller Сlass</em>;</li>
+<li>Установите соответствующие значения <strong>fx:id</strong> для всех компонентов <code>TextField</code>;</li>
+<li>В значениях параметров <strong>onAction</strong> для наших кнопок укажите соответствующие методы-обработчики.</li>
 </ol>
 <h3 id="-">Вызов диалога редактирования</h3>
-<p>Добавьте метод для загрузки и отображения диалога редактирования записей в наш класс <code>MainApp</code>:</p>
+<p>Добавьте в класс <code>MainApp</code> метод для загрузки и отображения диалога редактирования записей:</p>
 <h5 id="mainapp-java">MainApp.java</h5>
 <pre class="prettyprint lang-java">
 /**
- * Opens a dialog to edit details for the specified person. If the user
- * clicks OK, the changes are saved into the provided person object and true
- * is returned.
+ * Открывает диалоговое окно для изменения деталей указанного адресата.
+ * Если пользователь кликнул OK, то изменения сохраняются в предоставленном
+ * объекте адресата и возвращается значение true.
  * 
- * @param person the person object to be edited
- * @return true if the user clicked OK, false otherwise.
+ * @param person - объект адресата, который надо изменить
+ * @return true, если пользователь кликнул OK, в противном случае false.
  */
 public boolean showPersonEditDialog(Person person) {
     try {
-        // Load the fxml file and create a new stage for the popup dialog.
+        // Загружаем fxml-файл и создаём новую сцену
+        // для всплывающего диалогового окна.
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("view/PersonEditDialog.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
-        // Create the dialog Stage.
+        // Создаём диалоговое окно Stage.
         Stage dialogStage = new Stage();
         dialogStage.setTitle("Edit Person");
         dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -694,12 +701,12 @@ public boolean showPersonEditDialog(Person person) {
         Scene scene = new Scene(page);
         dialogStage.setScene(scene);
 
-        // Set the person into the controller.
+        // Передаём адресата в контроллер.
         PersonEditDialogController controller = loader.getController();
         controller.setDialogStage(dialogStage);
         controller.setPerson(person);
 
-        // Show the dialog and wait until the user closes it
+        // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
         dialogStage.showAndWait();
 
         return controller.isOkClicked();
@@ -710,12 +717,12 @@ public boolean showPersonEditDialog(Person person) {
 }
 </pre>
 
-<p>Добавьте следующие методы в класс <code>PersonOverviewController</code>. Когда пользователь будет нажимать на кнопки <code>New...</code> или <code>Edit...</code> эти методы будут вызывать метод <code>showPersonEditDialog(...)</code> из класса <code>MainApp</code>.</p>
+<p>Добавьте следующие методы в класс <code>PersonOverviewController</code>. Когда пользователь будет нажимать на кнопки <code>New...</code> или <code>Edit...</code>, эти методы будут обращаться к методу <code>showPersonEditDialog(...)</code> в классе <code>MainApp</code>.</p>
 <h5 id="personoverviewcontroller-java">PersonOverviewController.java</h5>
 <pre class="prettyprint lang-java">
 /**
- * Called when the user clicks the new button. Opens a dialog to edit
- * details for a new person.
+ * Вызывается, когда пользователь кликает по кнопке New...
+ * Открывает диалоговое окно с дополнительной информацией нового адресата.
  */
 @FXML
 private void handleNewPerson() {
@@ -727,8 +734,8 @@ private void handleNewPerson() {
 }
 
 /**
- * Called when the user clicks the edit button. Opens a dialog to edit
- * details for the selected person.
+ * Вызывается, когда пользователь кликает по кнопка Edit...
+ * Открывает диалоговое окно для изменения выбранного адресата.
  */
 @FXML
 private void handleEditPerson() {
@@ -740,7 +747,7 @@ private void handleEditPerson() {
         }
 
     } else {
-        // Nothing selected.
+        // Ничего не выбрано.
         Alert alert = new Alert(AlertType.WARNING);
         alert.initOwner(mainApp.getPrimaryStage());
         alert.setTitle("No Selection");
@@ -752,16 +759,16 @@ private void handleEditPerson() {
 }
 </pre>
 
-<p>Откройте <code>PersonOverview.fxml</code> в приложении Scene Builder и присвойте соответствующие методы-обработчики параметру <em>On Action</em> кнопок <code>New...</code> и <code>Edit...</code>.</p>
+<p>В приложении Scene Builder откройте представление <code>PersonOverview.fxml</code> и для кнопок <code>New...</code> и <code>Edit...</code> задайте соответствующие методы-обработчики в параметре <em>On Action</em> .</p>
 <hr>
-<h2 id="-">Сделано!</h2>
-<p>Сейчас вы должны получить работающее приложение адресной книги. Приложение способно добавлять, редактировать и удалять записи. Также оно способно делать проверку пользовательского ввода.</p>
-<p>Я надеюсь, что концепция и структура даного приложения поможет вам начать писать свои собственные JavaFX-приложения! Удачи.</p>
+<h2 id="-">Готово!</h2>
+<p>Сейчас у вас должно быть работающее приложение адресной книги. Оно позволяет добавлять, изменять и удалять адресатов. Это приложение так же осуществляет проверку всего, что вводит пользователь.</p>
+<p>Я надеюсь, что идея и структура данного приложения поможет вам начать писать свои собственные приложения JavaFX! Удачи.</p>
 <h3 id="-">Что дальше?</h3>
-<p>В <a href="/library/javafx-8-tutorial/ru/part4/" title="Tutorial Part 4">4 Части Учебника</a> мы будем подключать CSS-стили к нашему приложению.</p>
+<p>В <a href="/library/javafx-8-tutorial/ru/part4/" title="Tutorial Part 4">4-й части учебника</a> мы будем подключать к нашему приложению CSS-стили.</p>
 <h5 id="-">Вам могут быть интересны также некоторые другие статьи</h5>
 <ul>
-<li><a href="/blog/javafx-8-dialogs/">JavaFX Dialogs</a></li>
+<li><a href="/blog/javafx-dialogs-official/">JavaFX Dialogs (official)</a></li>
 <li><a href="/blog/javafx-8-date-picker/">JavaFX Date Picker</a></li>
 <li><a href="/blog/javafx-8-event-handling-examples/">JavaFX Event Handling Examples</a></li>
 <li><a href="/blog/javafx-8-tableview-sorting-filtering/">JavaFX TableView Sorting and Filtering</a></li>
@@ -798,7 +805,7 @@ private void handleEditPerson() {
       <a href="/library/javafx-8-tutorial/ru/part6/" data-toggle="tooltip" title="Часть 6: Статистическая диаграмма">6</a>
       </li>
         <li>
-      <a href="/library/javafx-8-tutorial/ru/part7/" data-toggle="tooltip" title="Часть 7: Развертывание">7</a>
+      <a href="/library/javafx-8-tutorial/ru/part7/" data-toggle="tooltip" title="Часть 7: Развёртывание">7</a>
       </li>
     
       </ul>

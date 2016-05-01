@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Учебник по JavaFX 8 - Часть 7: Развертывание | code.makery.ch</title>
+    <title>Учебник по JavaFX 8 - Часть 7: Развёртывание | code.makery.ch</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--
     /**
@@ -46,15 +46,15 @@
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" href="/rss" title="code.makery.ch - RSS Feed">
 
-    <meta name="description" content="Развертывание JavaFX приложения с помощью процесса нативной упаковки (native package). Создание инсталляционного пакета для Windows, Mac или Linux.">
+    <meta name="description" content="Развёртывание приложения JavaFX как нативного пакета (native package). Создание инсталляторов для Windows, Mac и Linux.">
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" value="summary">
 
     <!-- Open Graph data -->
-    <meta property="og:title" content="Учебник по JavaFX 8 - Часть 7: Развертывание | code.makery.ch" />
+    <meta property="og:title" content="Учебник по JavaFX 8 - Часть 7: Развёртывание | code.makery.ch" />
     <meta property="og:type" content="article" />
-    <meta property="og:description" content="Развертывание JavaFX приложения с помощью процесса нативной упаковки (native package). Создание инсталляционного пакета для Windows, Mac или Linux." />
+    <meta property="og:description" content="Развёртывание приложения JavaFX как нативного пакета (native package). Создание инсталляторов для Windows, Mac и Linux." />
     <meta property="og:url" content="http://code.makery.ch/library/javafx-8-tutorial/ru/part7/" />
     <meta property="og:image" content="http://code.makery.ch/assets/library/javafx-8-tutorial/part7/addressapp-macos.png" />
     
@@ -130,7 +130,7 @@
       <a href="/library/javafx-8-tutorial/ru/part6/" class="list-group-item">
         Часть 6: Статистическая диаграмма</a>
       <a href="/library/javafx-8-tutorial/ru/part7/" class="list-group-item active">
-        Часть 7: Развертывание</a>
+        Часть 7: Развёртывание</a>
   </div>
 </div>
 <div class="panel panel-default sidebar">
@@ -189,10 +189,10 @@
         </aside>
         <div class="col-md-9">
           <header class="article-header">
-            <h1 class="article-title">Учебник по JavaFX 8 - Часть 7: Развертывание</h1>
+            <h1 class="article-title">Учебник по JavaFX 8 - Часть 7: Развёртывание</h1>
             <div class="article-date">
   May 10, 2014
-  • Updated Dec 04, 2014
+  • Updated Apr 26, 2016
 
 </div>
           </header>
@@ -217,7 +217,7 @@
       <li class=""><a href="/library/javafx-8-tutorial/ru/part6/">
         Часть 6: Статистическая диаграмма</a></li>
       <li class=" active"><a href="/library/javafx-8-tutorial/ru/part7/">
-        Часть 7: Развертывание</a></li>
+        Часть 7: Развёртывание</a></li>
   </ul>
 </div>
 <div class="btn-group sidebar-dropdown">
@@ -273,79 +273,81 @@
           
           <div class="article-content">
             <p><img src="/assets/library/javafx-8-tutorial/part7/addressapp-part7.png" alt="Screenshot AddressApp Part 7"></p>
-<p>Я думаю, что написал последнюю часть данного учебника чтобы показать вам как развернуть (т.е. упаковать и опубликовать) наше приложение. </p>
+<p>Я написал последнюю часть данного учебника для того, чтобы показать вам, как развернуть (то есть упаковать и опубликовать) наше приложение AddressApp. </p>
 <hr>
 <h2 id="-7-">Часть 7: Содержание</h2>
 <ul>
-<li>Развертывание нашего JavaFX-приложения в виде нативной упаковки (Native Package) с использованием плагина e(fx)clipse.</li>
+<li>Развёртывание нашего JavaFX-приложения в виде нативного пакета (<strong>Native Package</strong>) с использованием плагина e(fx)clipse.</li>
 </ul>
 <hr>
-<h2 id="-">Что такое развертывание</h2>
-<p>Развертывание - это процесс упаковки и доставки програмного обеспечения к пользователю. Это важная часть процесса разработки ПО, т.к. здесь происходит первый контакт пользователя с нашим приложением.</p>
-<p>Java рекламируется под слоганом <em>"Написано однажды, работает везде"</em> для того, чтобы проиллюстрировать <em>кроссплатформенное</em> преимущество данного языка программирования. В идеале, это означает, что наше java-приложение сможет запуститься на любом устройстве, где установлена виртуальная машина Java (JVM). </p>
-<p>В прошлом, пользовательский опыт при установке java-приложения не всегда был гладким. Если у пользователя на системе не была установлена требуемая версия Java, он перенаправлялся для ее инсталляции. Это приводило к некоторым трудностям: к необходимости иметь права администратора, к возникновению вопросов совместимости версий Java, и т.д.</p>
-<p>К счастью, JavaFX предоставляет новую опцию развертывания, которая имеет название "Нативная упаковка" (<strong>Native Packaging</strong>) (другое название "Автономная упаковка приложения" (Self-Containde Application Package)). Нативная упаковка - это пакет, содержащий вместе java-приложение и среду выполнения Java для конкретной платформы.</p>
-<p>Официальная документация по JavaFX от Oracle содержит обширное руководство для всех возможных вариантов <a href="http://docs.oracle.com/javafx/2/deployment/jfxpub-deployment.htm">развертывания JavaFX-приложений</a>.</p>
-<p>В этой статье я покажу как создать "Нативную упаковку" с помощью приложения Eclipse и <a href="http://www.eclipse.org/efxclipse/">плагина e(fx)clipse</a>.</p>
+<h2 id="-">Что такое развёртывание</h2>
+<p>Развёртывание - это процесс упаковки и доставки программного обеспечения пользователю. Это важная часть процесса разработки ПО, так как здесь происходит первый контакт пользователя с нашим приложением.</p>
+<p>Для того, чтобы проиллюстрировать <em>кроссплатформенное</em> преимущество данного языка программирования, Java рекламируется под слоганом <em>"Написано однажды, работает везде"</em>. В идеале это означает, что наше Java-приложение сможет запуститься на любом устройстве, где установлена виртуальная машина Java (JVM). </p>
+<p>В прошлом, пользовательский опыт от установки приложений Java не всегда был радостным. Если у пользователя в системе не была установлена требуемая версия Java, он перенаправлялся для её установки. Это приводило к некоторым трудностям, например, к необходимости обладать правами администратора, к возникновению вопросов совместимости версий Java, и прочему.</p>
+<p>К счастью, JavaFX предоставляет новую возможность развёртывания, называемую "нативная упаковка" (<strong>Native Packaging</strong>) (другое название - "Автономная упаковка приложения" (Self-Containde Application Package)). Нативный Пакет - это пакет, который вместе с приложением Java содержит и среду выполнения Java для конкретной платформы.</p>
+<p>Официальная документация по JavaFX от Oracle содержит обширное руководство для всех возможных вариантов <a href="http://docs.oracle.com/javafx/2/deployment/jfxpub-deployment.htm">развёртывания приложений JavaFX</a>.</p>
+<p>В этой статье я покажу как создать "Нативную Пакет" с помощью приложения Eclipse и <a href="http://www.eclipse.org/efxclipse/">плагина e(fx)clipse</a>.</p>
 <hr>
-<h2 id="-">Создание нативной упаковки</h2>
-<p>Цель заключается в создании автономно-упакованного приложения, размещенного в одной директории на компьютере пользователя. То, как оно примерно будет выглядеть для нашего приложения на Windows можно посмотреть ниже:</p>
+<h2 id="-">Создание нативного пакета</h2>
+<p>Цель заключается в создании автономно-упакованного приложения, которое будет размещаться на компьютере пользователя в одной директории. То, как наше приложение будет примерно выглядеть в Windows можно посмотреть ниже:</p>
 <p><img src="/assets/library/javafx-8-tutorial/part7/native-package.png" alt="AddressApp Native Package"></p>
-<p>Папка <code>app</code> содержит данные нашего приложения, а папка <code>runtime</code> - платформо-зависимую среду выполнения.</p>
-<p>Для того, чтобы сделать этот процесс более комфортным для пользователя, мы предоставим ему инсталлятор:</p>
+<p>В папке <code>app</code> лежат данные приложения, а в папке <code>runtime</code> - платформ-зависимая среда выполнения.</p>
+<p>Для того, чтобы сделать процесс установки более комфортным для пользователя, мы предоставим ему установщик:</p>
 <ul>
-<li><code>exe</code>-инсталлятор для Windows</li>
-<li><code>dmg</code>-инсталлятор для MacOS.</li>
+<li><code>exe</code>-установщик для Windows</li>
+<li><code>dmg</code>-установщик для MacOS.</li>
 </ul>
-<p>Плагин e(fx)clipse поможет нам сгенерировать нативную упаковку и инсталлятор.</p>
-<h3 id="-1-build-fxbuild">Шаг 1 - Редактируем файл build.fxbuild</h3>
-<p>Файл <code>build.fxbuild</code> используется плагином e(fx)clipse для генерации файла, который будет использоватся инструментом сборки Ant. (Если у вас нет файла <code>build.fxbuild</code>, создайте новый JavaFX-проект в приложении Eclipse и скопируйте сгенерированный файл.)</p>
+<p>Плагин e(fx)clipse поможет нам сгенерировать нативный пакет и установщик.</p>
+<h3 id="-1-build-fxbuild">Шаг 1-й. Редактируем файл build.fxbuild</h3>
+<p>Файл <code>build.fxbuild</code> используется плагином e(fx)clipse для генерации файла, который в свою очередь будет использоваться инструментом сборки Ant. (Если у вас нет файла <code>build.fxbuild</code>, то создайте в Eclipse новый проект JavaFX и скопируйте оттуда сгенерированный файл).</p>
 <ol>
 <li><p>Откройте файл <code>build.fxbuild</code> из корневой папки вашего проекта.</p>
 </li>
-<li><p>Заполните все поля помеченные звездочкой. Для MacOS: не используйте пробелы в названии приложения (в поле <em>Application Title</em>) так как это, кажется, приводит к проблемам).<br><img src="/assets/library/javafx-8-tutorial/part7/fxbuild-settings.png" alt="fxbuild settings"></p>
+<li><p>Заполните все поля, помеченные звёздочками. Для владельцев MacOS: не используйте пробелы в названии приложения (в поле <em>Application Title</em>) так как это, похоже, приводит к проблемам).<br><img src="/assets/library/javafx-8-tutorial/part7/fxbuild-settings.png" alt="fxbuild settings"></p>
 </li>
-<li><p>Выберите значение формата упаковки: для Windows - <code>exe</code>, для MacOS - <code>dmg</code>, для Linux - <code>rpm</code>.</p>
+<li><p>Выберите формат упаковки: для Windows - <code>exe</code>, для MacOS - <code>dmg</code>, или Linux - <code>rpm</code>.</p>
 </li>
-<li><p>Нажмите на ссылку <code>Generate ant build.xml only</code> справа.<br><img src="/assets/library/javafx-8-tutorial/part7/generate-ant-build.png" alt="generate ant build"></p>
+<li><p>Справа нажмите на ссылку <code>Generate ant build.xml only</code>.<br><img src="/assets/library/javafx-8-tutorial/part7/generate-ant-build.png" alt="generate ant build"></p>
 </li>
-<li><p>Проверьте, создалась ни новая папка <code>build</code> с файлом <code>build.xml</code>.</p>
+<li><p>Проверьте, была ли создана папка <code>build</code> с файлом <code>build.xml</code>.</p>
 </li>
 </ol>
-<h3 id="-2-">Шаг 2 - Добавляем в инсталлятор иконки</h3>
-<p>Мы можем добавить в наш инсталлятор пару красивых иконок:</p>
+<h3 id="-2-">Шаг 2. Добавляем в установщик иконки</h3>
+<p>Мы можем добавить в наш установщик пару красивых иконок:</p>
 <ul>
-<li><a href="/assets/library/javafx-8-tutorial/part7/AddressApp.ico">AddressApp.ico</a> для иконки инсталляционного файла</li>
-<li><a href="/assets/library/javafx-8-tutorial/part7/AddressApp-setup-icon.bmp">AddressApp-setup-icon.bmp</a> для экрана приветствия инсталлятора</li>
-<li><a href="/assets/library/javafx-8-tutorial/part7/AddressApp.icns">AddressApp.icns</a> - для инсталлятора под MacOS</li>
+<li><a href="/assets/library/javafx-8-tutorial/part7/AddressApp.ico">AddressApp.ico</a> для иконки файла установщика</li>
+<li><a href="/assets/library/javafx-8-tutorial/part7/AddressApp-setup-icon.bmp">AddressApp-setup-icon.bmp</a> для экрана приветствия установщика</li>
+<li><a href="/assets/library/javafx-8-tutorial/part7/AddressApp.icns">AddressApp.icns</a> - для установщика под MacOS</li>
+<li><a href="/assets/library/javafx-8-tutorial/part7/AddressApp-volume.icns">AddressApp-volume.icns</a> для рабочего стола Mac</li>
 </ul>
 <ol>
-<li>Создайте следующие подпапки в папке <code>build</code>:<ul>
+<li>Создайте в папке <code>build</code> следующие подкаталоги:<ul>
 <li><code>build/package/windows</code> (используется только в Windows)</li>
-<li><code>build/package/macos</code> (используется только в MacOS)</li>
+<li><code>build/package/macosx</code> (используется только в MacOS)</li>
 </ul>
 </li>
-<li>Скопируйте соответствующие иконки с приведенных ссылок и поместите их в назначенные для них папки. В результате это должно выглядеть так:<br><img src="/assets/library/javafx-8-tutorial/part7/installer-icons.png" alt="Installer Icons"></li>
-<li><strong>Важно</strong>: Имена иконок должны точно совпадать с именем приложения, которое вы указали в <code>build.fxbuild</code>:<ul>
-<li><code>YourAppTitle.ico</code></li>
-<li><code>YourAppTitle-setup-icon.bmp</code></li>
-<li><code>YourAppTitle.icns</code></li>
+<li>Из приведенных ссылок загрузите соответствующие иконки и поместите их в назначенные для них папки. В результате это должно выглядеть так:<br><img src="/assets/library/javafx-8-tutorial/part7/installer-icons.png" alt="Installer Icons"></li>
+<li><strong>Важно</strong>: Имена иконок должны точно соответствовать имени приложения, которое вы указали в <code>build.fxbuild</code>:<ul>
+<li><code>НазваниеВашегоПриложения.ico</code></li>
+<li><code>НазваниеВашегоПриложения-setup-icon.bmp</code></li>
+<li><code>НазваниеВашегоПриложения .icns</code></li>
+<li><code>НазваниеВашегоПриложения-volume.icns</code></li>
 </ul>
 </li>
 </ol>
-<h3 id="-3-">Шаг 3 - Добавляем ресурсы</h3>
-<p>Наша папка <code>resources</code> не скопируется автоматически. Мы должны в ручную добавить ее в папку <code>build</code>:</p>
+<h3 id="-3-">Шаг 3. Добавляем ресурсы</h3>
+<p>Наша папка <code>resources</code> автоматически не будет скопирована автоматически. Мы должны вручную добавить её в папку <code>build</code>:</p>
 <ol>
-<li>Создайте подпапку <code>dist</code> в папке <code>build</code>:<ul>
+<li>Создайте в папке <code>build</code> подкаталог <code>dist</code>:<ul>
 <li><code>build/dist</code></li>
 </ul>
 </li>
-<li>Скопируйте папку <code>resources</code> (которая содержит иконки для нашего приложения) в <code>build/dist</code>.<br><img src="/assets/library/javafx-8-tutorial/part7/build-resources.png" alt="Build Resources"></li>
+<li>Скопируйте папку <code>resources</code> (которая содержит иконки нашего приложения) в <code>build/dist</code>.<br><img src="/assets/library/javafx-8-tutorial/part7/build-resources.png" alt="Build Resources"></li>
 </ol>
-<h3 id="-4-build-xml-">Шаг 4 - Редактируем build.xml и включаем в него иконки</h3>
-<p>Плагин e(fx)clipse сгенерировал файл <code>build/build.xml</code>, который готов для выполнения <strong>Ant</strong>'ом. Пока наши иконки работать не будут.</p>
-<p>Так как e(fx)clipse не может сообщить (пока?), что нам необходимо включить дополнительные ресурсы в папку, нам необходимо сделать это вручную путем редактирования <code>build.xml</code>:</p>
-<p>Откройте <code>build.xml</code> и найдите тег <code>&lt;path id="fxant"&gt;</code>. Добавьте одну строку для <code>${basedir}</code> (это сделает наши иконки видимыми):</p>
+<h3 id="-4-build-xml-">Шаг 4. Редактируем build.xml и включаем в него иконки</h3>
+<p>Плагин e(fx)clipse сгенерировал файл <code>build/build.xml</code>, который готов для выполнения <strong>Ant</strong>'ом. Но пока наши иконки и изображения ресурсов работать не будут.</p>
+<p>Пока (?) плагину e(fx)clipse нельзя указать, что нам необходимо включить дополнительные ресурсы, например папку <code>resource</code> и иконки, которые мы добавили ранее. Нам необходимо сделать это вручную путём редактирования <code>build.xml</code>:</p>
+<p>Откройте <code>build.xml</code> и найдите тег <code>&lt;path id="fxant"&gt;</code>. Добавьте одну строку для <code>${basedir}</code> (это сделает наши иконки доступными):</p>
 <h5 id="build-xml-basedir-">build.xml - добавляем "basedir"</h5>
 <pre class="prettyprint lang-xml">
 &lt;path id="fxant"&gt;
@@ -358,7 +360,7 @@
 </pre>
 
 
-<p>Ниже найдите блок кода <code>fx:resources id="appRes"</code>. Добавьте одну строку для наших ресурсов:</p>
+<p>Ниже найдите блок кода <code>fx:resources id="appRes"</code>. Добавьте одну строку для наших ресурсов <code>resources</code>:</p>
 <h5 id="build-xml-resources-">build.xml - добавляем "resources"</h5>
 <pre class="prettyprint lang-xml">
 &lt;fx:resources id="appRes"&gt;
@@ -369,7 +371,7 @@
 </pre>
 
 
-<p>Почему-то, номер версии не добавляется в <code>fx:application</code>, который всегда делает версию нашего установщик <code>1.0</code> (как указали несколько человек в комментариях). Для исправления этого, добавьте номер версии вручную (спасибо Марку, что <a href="/library/javafx-8-tutorial/part7/#comment-1566725959">выяснил это</a>):</p>
+<p>По какой-то причине номер версии не добавляется в <code>fx:application</code>, что всегда делает версию нашего установщика <code>1.0</code> (как указали несколько человек в комментариях). Для исправления этого, добавьте номер версии вручную (спасибо Марку, что <a href="http://code.makery.ch/library/javafx-8-tutorial/part7/#comment-1566725959">выяснил это</a>):</p>
 <h5 id="build-xml-version-">build.xml - добавляем "version"</h5>
 <pre class="prettyprint lang-xml">
 &lt;fx:application id="fxApplication"
@@ -379,37 +381,37 @@
 />
 </pre>
 
-<p>Теперь мы можем запускать <code>build.xml</code> через Ant. Это сгенерирует нам работоспособный jar-файл проекта. Но мы хотим пойти на шаг дальше и создать хороший установщик.</p>
-<h3 id="-5-exe-windows">Шаг 5 - exe-установщик под Windows</h3>
+<p>Теперь мы готовы запускать <code>build.xml</code> через Ant. Это сгенерирует нам исполняемый jar-файл проекта. Но мы хотим пойти на шаг дальше и создать хороший установщик.</p>
+<h3 id="-5-exe-windows">Шаг 5. EXE-установщик под Windows</h3>
 <p><img src="/assets/library/javafx-8-tutorial/part7/addressapp-windows.png" alt="AddressApp on Windows"></p>
-<p>С помощью <strong>Inno Setup</strong> мы можем создать установщик под Windows для нашего приложения в виде единого <code>.exe</code>-файла. Созданный <code>.exe</code>-установщик будет проводить установку программы на уровне пользователя (не потребуются права администратора). Также будет создан ярлык (в меню или на рабочем столе).</p>
+<p>С помощью утилиты <strong>Inno Setup</strong> можно создать установщик нашей адресной книги для Windows в виде единого <code>.exe</code>-файла. Созданный <code>.exe</code>-установщик будет устанавливать программу на уровне пользователя (не потребуются права администратора). Также он создаст ярлык (в меню или на рабочем столе).</p>
 <ol>
 <li><p>Скачайте <a href="http://www.jrsoftware.org/isdl.php">Inno Setup</a> версии 5 или выше. Установите Inno Setup на ваш компьютер. Наш Ant-скрипт будет использоваться для автоматической генерации установщика.</p>
 </li>
-<li><p>Укажите Windows путь к Inno Setup (например, <code>C:\Program Files (x86)\Inno Setup 5</code>). Для этого добавьте Inno Setup к переменной <code>Path</code> в ваших переменных окружения. Если вы не знаете где их найти, почитайте <a href="http://www.computerhope.com/issues/ch000549.htm">Как установить пути и переменные окружения в Windows</a>.</p>
+<li><p>Укажите системе Windows путь к Inno Setup (например, <code>C:\Program Files (x86)\Inno Setup 5</code>). Для этого добавьте Inno Setup в переменную <code>Path</code> в переменных окружения системы. Если вы не знаете где их найти, почитайте <a href="http://www.computerhope.com/issues/ch000549.htm">Как установить пути и переменные окружения в Windows</a>.</p>
 </li>
-<li><p>Перезапустите приложение Eclipse и продолжите с шага 5.</p>
+<li><p>Перезапустите приложение Eclipse и продолжите с шага 6.</p>
 </li>
 </ol>
-<h3 id="-5-dmg-macos">Шаг 5 - dmg-установщик для MacOS</h3>
+<h3 id="-5-dmg-macos">Шаг 5. DMG-установщик для MacOS</h3>
 <p><img src="/assets/library/javafx-8-tutorial/part7/addressapp-macos.png" alt="AddressApp on Mac"></p>
-<p>Для создания <code>dmg</code>-установщика под MacOS никаких дополнительных инструментов не требуется.</p>
-<p>Заметка: Для того, чтобы отображалось изображение установщика, вы должны задать этому изображению такое же название, как у вашего приложения.</p>
-<h3 id="-5-rpm-linux">Шаг 5 - rpm-установщик для Linux</h3>
+<p>Для создания <code>dmg</code>-установщика под MacOS никаких дополнительных инструментов не потребуется.</p>
+<p>Примечание: Для того, чтобы пользователь видел картинку установщика, следует назвать это изображение точно так же, как и наше приложение.</p>
+<h3 id="-5-linux-rpm-linux">Шаг 5 (LINUX и другие). RPM-установщик для Linux</h3>
 <p>Для других способов упаковки приложения (<code>msi</code> для Windows, <code>rpm</code> для Linux) читайте <a href="https://blogs.oracle.com/talkingjavadeployment/entry/native_packaging_for_javafx">эту статью</a> или <a href="http://docs.oracle.com/javafx/2/deployment/self-contained-packaging.htm#A1324980">документацию от Oracle</a>.</p>
 <h3 id="-6-build-xml">Шаг 6 - Запускаем build.xml</h3>
-<p>На последнем шаге мы запустим файл <code>build.xml</code> с помощью Ant: кликните правой кнопкой мышки на файл <code>build.xml</code> <em>| Run As | Ant Build</em>.</p>
+<p>На последнем этапе мы запустим файл <code>build.xml</code> с помощью Ant: кликните правой кнопкой мышки на файле <code>build.xml</code> <em>| Run As | Ant Build</em>.</p>
 <p><img src="/assets/library/javafx-8-tutorial/part7/run-ant-build.png" alt="Run Ant Build"></p>
-<p>Сборка приложения займет немного времени (около 1 минуты на моем компьютере).</p>
-<p>Если все прошло удачно, вы должны найти нативные сборки в папке <code>build/deploy/bundles</code>. Вот так выглядит версия для Windows:</p>
+<p>Сборка приложения займёт какое-то время (около 1 минуты на моём компьютере).</p>
+<p>Если всё прошло удачно, вы должны найти нативные сборки в папке <code>build/deploy/bundles</code>. Вот так выглядит версия для Windows:</p>
 <p><img src="/assets/library/javafx-8-tutorial/part7/deployed-file.png" alt="Deployed File"></p>
 <p>Файл <code>AddressApp-1.0.exe</code> может использоваться как единственный файл для установки приложения. Этот установщик скопирует нашу сборку в папку <code>C:/Users/[yourname]/AppData/Local/AddressApp</code>.</p>
 <h3 id="-">Что дальше?</h3>
-<p>Надеюсь, что этот учебник поможет вам начать работать с JavaFX и с этого момента вы сможете писать свои JavaFX-проекты.</p>
-<p>Я ценю любую обратную связь. Не стесняйтесь писать комментарии если у вас есть какие-либо предложения или если вам что-то не ясно.</p>
+<p>Надеюсь, что этот учебник поможет вам начать работать с JavaFX и с этого момента вы сможете писать собственные проекты JavaFX.</p>
+<p>Я буду признателен любым отзывам. Если у вас есть какие-либо предложения, или если вам что-то не ясно, то не стесняйтесь писать комментарии.</p>
 <h5 id="-">Вам могут быть интересны также некоторые другие статьи</h5>
 <ul>
-<li><a href="/blog/javafx-8-dialogs/">JavaFX Dialogs</a></li>
+<li><a href="/blog/javafx-dialogs-official/">JavaFX Dialogs (official)</a></li>
 <li><a href="/blog/javafx-8-date-picker/">JavaFX Date Picker</a></li>
 <li><a href="/blog/javafx-8-event-handling-examples/">JavaFX Event Handling Examples</a></li>
 <li><a href="/blog/javafx-8-tableview-sorting-filtering/">JavaFX TableView Sorting and Filtering</a></li>
@@ -446,7 +448,7 @@
       <a href="/library/javafx-8-tutorial/ru/part6/" data-toggle="tooltip" title="Часть 6: Статистическая диаграмма">6</a>
       </li>
         <li class="active">
-      <a href="/library/javafx-8-tutorial/ru/part7/" data-toggle="tooltip" title="Часть 7: Развертывание">7</a>
+      <a href="/library/javafx-8-tutorial/ru/part7/" data-toggle="tooltip" title="Часть 7: Развёртывание">7</a>
       </li>
     
       </ul>
@@ -515,7 +517,7 @@
     var disqus_shortname = 'codemakery'; // Required - the forum shortname
     var disqus_identifier = '/library/javafx-8-tutorial/ru/part7/';
     var disqus_url = 'http://code.makery.ch/library/javafx-8-tutorial/ru/part7/';
-    var disqus_title = 'Учебник по JavaFX 8 - Часть 7: Развертывание';
+    var disqus_title = 'Учебник по JavaFX 8 - Часть 7: Развёртывание';
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {

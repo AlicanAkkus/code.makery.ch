@@ -46,7 +46,7 @@
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" href="/rss" title="code.makery.ch - RSS Feed">
 
-    <meta name="description" content="Используйте JavaFX TableView для отображения списка персон из ObservableList">
+    <meta name="description" content="Используйте JavaFX TableView для отображения списка людей из ObservableList">
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" value="summary">
@@ -54,7 +54,7 @@
     <!-- Open Graph data -->
     <meta property="og:title" content="Учебник по JavaFX 8 - Часть 2: Модель и компонент TableView | code.makery.ch" />
     <meta property="og:type" content="article" />
-    <meta property="og:description" content="Используйте JavaFX TableView для отображения списка персон из ObservableList" />
+    <meta property="og:description" content="Используйте JavaFX TableView для отображения списка людей из ObservableList" />
     <meta property="og:url" content="http://code.makery.ch/library/javafx-8-tutorial/ru/part2/" />
     <meta property="og:image" content="http://code.makery.ch/assets/library/javafx-8-tutorial/part2/addressapp-part2.png" />
     
@@ -130,7 +130,7 @@
       <a href="/library/javafx-8-tutorial/ru/part6/" class="list-group-item">
         Часть 6: Статистическая диаграмма</a>
       <a href="/library/javafx-8-tutorial/ru/part7/" class="list-group-item">
-        Часть 7: Развертывание</a>
+        Часть 7: Развёртывание</a>
   </div>
 </div>
 <div class="panel panel-default sidebar">
@@ -192,7 +192,7 @@
             <h1 class="article-title">Учебник по JavaFX 8 - Часть 2: Модель и компонент TableView</h1>
             <div class="article-date">
   Apr 19, 2014
-  • Updated Dec 04, 2014
+  • Updated Apr 21, 2016
 
 </div>
           </header>
@@ -217,7 +217,7 @@
       <li class=""><a href="/library/javafx-8-tutorial/ru/part6/">
         Часть 6: Статистическая диаграмма</a></li>
       <li class=""><a href="/library/javafx-8-tutorial/ru/part7/">
-        Часть 7: Развертывание</a></li>
+        Часть 7: Развёртывание</a></li>
   </ul>
 </div>
 <div class="btn-group sidebar-dropdown">
@@ -277,11 +277,11 @@
 <ul>
 <li>Создание класса-<strong>модели</strong>;</li>
 <li>Использование класса-модели в коллекции <strong>ObservableList</strong>;</li>
-<li>Отображение данных в компоненте <strong>TableView</strong> используя <strong>Контроллеры</strong>.</li>
+<li>Отображение данных в компоненте <strong>TableView</strong> с помощью <strong>Контроллеров</strong>.</li>
 </ul>
 <hr>
 <h2 id="-">Создание класса-модели</h2>
-<p>Класс-модель нам необходим для хранения информации о людях в нашей адресной книге. Добавьте класс <code>Person.java</code> в пакет <code>ch.makery.address.model</code>. В нем будет несколько переменных для хранения имени, адреса и дня рождения. Добавьте следующий код в этот класс.</p>
+<p>Класс-модель необходим для хранения в нашей будущей адресной книге информации об адресатах. Добавьте класс <code>Person.java</code> в пакет <code>ch.makery.address.model</code>. В нём будет несколько переменных для хранения информации об имени, адресе и дне рождения. Добавьте в этот класс следующий код.</p>
 <h5 id="person-java">Person.java</h5>
 <pre class="prettyprint lang-java">
 package ch.makery.address.model;
@@ -296,7 +296,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
- * Model class for a Person.
+ * Класс-модель для адресата (Person).
  *
  * @author Marco Jakob
  */
@@ -310,14 +310,14 @@ public class Person {
     private final ObjectProperty&lt;LocalDate&gt; birthday;
 
     /**
-     * Default constructor.
+     * Конструктор по умолчанию.
      */
     public Person() {
         this(null, null);
     }
 
     /**
-     * Constructor with some initial data.
+     * Конструктор с некоторыми начальными данными.
      * 
      * @param firstName
      * @param lastName
@@ -326,10 +326,10 @@ public class Person {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
 
-        // Some initial dummy data, just for convenient testing.
-        this.street = new SimpleStringProperty("some street");
+        // Какие-то фиктивные начальные данные для удобства тестирования.
+        this.street = new SimpleStringProperty("какая-то улица");
         this.postalCode = new SimpleIntegerProperty(1234);
-        this.city = new SimpleStringProperty("some city");
+        this.city = new SimpleStringProperty("какой-то город");
         this.birthday = new SimpleObjectProperty&lt;LocalDate&gt;(LocalDate.of(1999, 2, 21));
     }
 
@@ -408,34 +408,34 @@ public class Person {
 </pre>
 
 
-<h3 id="-">Объяснения</h3>
+<h3 id="-">Объяснение</h3>
 <ul>
-<li>В JavaFX предпочтительно использовать <a href="http://docs.oracle.com/javase/8/javafx/api/javafx/beans/property/Property.html"><code>Properties</code></a> для всех полей класса-модели. <code>Property</code> позволяет нам получать автоматические уведомления при любых изменениях переменных, таких как <code>lastName</code> или других. Это помогает нам сохранять синхронность отображения и данных. Для более делатьного изучения <code>Properties</code> читайте <a href="http://docs.oracle.com/javase/8/javafx/properties-binding-tutorial/binding.htm" title="Using JavaFX Properties and Binding">Using JavaFX Properties and Binding</a>;</li>
+<li>В JavaFX для всех полей класса-модели предпочтительно использовать <a href="http://docs.oracle.com/javase/8/javafx/api/javafx/beans/property/Property.html. `Property` позволяет нам получать автоматические уведомления при любых изменениях переменных, таких как `lastName` или любых других. Это позволяет поддерживать синхронность представления и данных. Для более детального изучения `Properties` можно прочесть статью [Using JavaFX Properties and Binding](http://docs.oracle.com/javase/8/javafx/properties-binding-tutorial/binding.htm" title="Using JavaFX Properties and Binding"><code>Properties</code></a>;</li>
 </ul>
 <ul>
 <li>Класс <a href="http://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html"><code>LocalDate</code></a>, тип которого мы выбрали для нашей переменной <code>birthday</code>, это часть нового <a href="http://docs.oracle.com/javase/tutorial/datetime/iso/" title="Date and Time API for JDK 8">Date and Time API для JDK 8</a>.</li>
 </ul>
 <hr>
-<h2 id="-">Список записей</h2>
-<p>Основные данные, которыми оперирует наше приложение - это связка экземпляров класса <code>Person</code>. Давайте создадим список объектов класса <code>Person</code> внутри класса <code>MainApp.java</code>. Все остальные классы-контроллеры позже получат доступ к этой центральной коллекции внутри класса <code>MainApp.java</code>.</p>
+<h2 id="-">Список людей</h2>
+<p>Основные данные, которыми оперирует наше приложение - это группа экземпляров класса <code>Person</code>. Давайте создадим в классе <code>MainApp.java</code> список объектов класса <code>Person</code>. Все остальные классы-контроллеры позже получат доступ к этому центральному списку внутри этого класса.</p>
 <h3 id="-observablelist">Список ObservableList</h3>
-<p>Мы работаем с классами-видами, которые необходимо информировать при любых изменениях в записях адресной книги. Не будь этого, мы бы не могли синхронизировать отображение данных с самими данными, которые у нас есть. Для этой цели в JavaFX предоставлены некоторые новые <a href="http://docs.oracle.com/javase/8/javafx/collections-tutorial/collections.htm" title="Collection classes">классы-коллекции</a>.</p>
-<p>Из этих классов нам необходим класс <code>ObservableList</code>. Для создания экземпляра данного класса добавьте приведенный код в начало нашего класса <code>MainApp.java</code>. Также добавьте в код конструктор, внутри которого наш список будет наполняться данными и добавьте геттер для нашего списка с публичным модификатором доступа:</p>
+<p>Мы работаем с классами-представлениями JavaFX, которые необходимо информировать при любых изменениях в списке адресатов. Это важно, потому что, не будь этого, мы бы не смогли синхронизировать представление данных с самими данными. Для этой цели в JavaFX были введены некоторые новые <a href="http://docs.oracle.com/javase/8/javafx/collections-tutorial/collections.htm" title="Collection classes">классы коллекций</a>.</p>
+<p>Из этих классов нам понадобится класс <code>ObservableList</code>. Для создания экземпляра данного класса добавьте приведённый код в начало <code>MainApp.java</code>. Мы так же добавим в код конструктор, который будет создавать некоторые демонстрационный данные и метод-геттер с публичным модификатором доступа:</p>
 <h5 id="mainapp-java">MainApp.java</h5>
 <pre class="prettyprint lang-java">
 
-    // ... AFTER THE OTHER VARIABLES ...
+    // ... ПОСЛЕ ДРУГИХ ПЕРЕМЕННЫХ ...
 
     /**
-     * The data as an observable list of Persons.
+     * Данные, в виде наблюдаемого списка адресатов.
      */
     private ObservableList&lt;Person&gt; personData = FXCollections.observableArrayList();
 
     /**
-     * Constructor
+     * Конструктор
      */
     public MainApp() {
-        // Add some sample data
+        // В качестве образца добавляем некоторые данные
         personData.add(new Person("Hans", "Muster"));
         personData.add(new Person("Ruth", "Mueller"));
         personData.add(new Person("Heinz", "Kurz"));
@@ -448,26 +448,26 @@ public class Person {
     }
 
     /**
-     * Returns the data as an observable list of Persons. 
+     * Возвращает данные в виде наблюдаемого списка адресатов.
      * @return
      */
     public ObservableList&lt;Person&gt; getPersonData() {
         return personData;
     }
 
-    // ... THE REST OF THE CLASS ...
+    // ... ОСТАЛЬНАЯ ЧАСТЬ КЛАССА ...
 </pre>
 
 
 <hr>
 <h2 id="-personoverviewcontroller">Класс PersonOverviewController</h2>
-<p>Теперь мы отобразим некоторые данные в нашей таблице. Для этого нам необходимо создать класс-контроллер для нашего <code>PersonOverview.fxml</code>.</p>
+<p>Теперь мы отобразим в нашей таблице некоторые данные. Для этого необходимо создать класс-контроллер для представления <code>PersonOverview.fxml</code>.</p>
 <ol>
-<li>Создайте новый класс внутри пакета <code>view</code> и назовите его <code>PersonOverviewController.java</code>. (Мы должны разместить наш класс-контроллер в тот же пакет, где находится наш файл разметки <code>PersonOverview.fxml</code>, иначе приложение Scene Builder не сможет найти его - по крайней мере не в текущей версии);</li>
-<li>Для того, чтобы получить доступ к таблице и меткам внутри нашего окна, мы определим некоторые переменные. Эти переменные и некоторые методы имеют специальную аннотацию <code>@FXML</code>. Она необходима для того, чтобы fxml-файл имел доступ к приватным полям и приватным методам. После этого мы настроим наш fxml-файл так, что при его загрузке приложение автоматически будет заполнять эти переменные данными. Ну что, давайте добавим следующий код в наш класс:</li>
+<li>Создайте новый класс внутри пакета <code>view</code> и назовите его <code>PersonOverviewController.java</code>. (Мы должны разместить этот класс-контроллер в том же пакете, где находится файл разметки <code>PersonOverview.fxml</code>, иначе Scene Builder не сможет его найти.)</li>
+<li>Для того, чтобы получить доступ к таблице и меткам представления, мы определим некоторые переменные. Эти переменные и некоторые методы имеют специальную аннотацию <code>@FXML</code>. Она необходима для того, чтобы fxml-файл имел доступ к приватным полям и методам. После этого мы настроим наш fxml-файл так, что при его загрузке приложение автоматически заполняло эти переменные данными. Итак, давайте добавим следующий код в наш класс:</li>
 </ol>
 <div class="alert alert-info">
-<strong>Заметка</strong>: При импорте пакетов всегда используйте пакет <strong><em>javafx</em></strong>, а НЕ <em>awt</em> или <em>swing</em>!
+<strong>Примечание</strong>: При импорте пакетов всегда используйте пакет <strong><em>javafx</em></strong>, а НЕ <em>awt</em> или <em>swing</em>!
 </div>
 
 
@@ -503,68 +503,82 @@ public class PersonOverviewController {
     @FXML
     private Label birthdayLabel;
 
-    // Reference to the main application.
+    // Ссылка на главное приложение.
     private MainApp mainApp;
 
     /**
-     * The constructor.
-     * The constructor is called before the initialize() method.
+     * Конструктор.
+     * Конструктор вызывается раньше метода initialize().
      */
     public PersonOverviewController() {
     }
 
     /**
-     * Initializes the controller class. This method is automatically called
-     * after the fxml file has been loaded.
+     * Инициализация класса-контроллера. Этот метод вызывается автоматически
+     * после того, как fxml-файл будет загружен.
      */
     @FXML
     private void initialize() {
-        // Initialize the person table with the two columns.
+        // Инициализация таблицы адресатов с двумя столбцами.
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
     }
 
     /**
-     * Is called by the main application to give a reference back to itself.
+     * Вызывается главным приложением, которое даёт на себя ссылку.
      * 
      * @param mainApp
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
 
-        // Add observable list data to the table
+        // Добавление в таблицу данных из наблюдаемого списка
         personTable.setItems(mainApp.getPersonData());
     }
 }
 </pre>
 
 
-<p>Наш код требует некоторых объяснений:</p>
-<p>*- Все поля и методы, к которым fxml-файлу потребуется доступ, должны быть помечены аннотацией <code>@FXML</code>. Правда, это верно только для полей и методов с модификатором private, но лучше оставить их такими и помечать аннотацией, чем делать публичными!</p>
+<p>Этот код требует некоторых разъяснений:</p>
 <ul>
-<li>Метод <code>initialize()</code> автоматически вызывается после загрузки fxml-файла. На этот момент все FXML-поля должны быть иниализированны;</li>
-<li>Метод <code>setCellValueFactory(...)</code> используется для определения того, какое поле внутри класса <code>Person</code> будут использоватся для конкретного столбца в таблице. Стрелка <code>-&gt;</code> означает, что мы использовали <strong>лямбда-выражение</strong> из Java 8. (Есть вариант сделать то же самое через <a href="http://docs.oracle.com/javase/8/javafx/api/index.html?javafx/scene/control/cell/PropertyValueFactory.html" title="PropertyValueFactory">PropertyValueFactory</a>, но этот способ нарушает безопасность типов).</li>
+<li>Все поля и методы, к которым fxml-файлу потребуется доступ, должны быть отмечены аннотацией <code>@FXML</code>. Несмотря на то, что это требование предъявляется только для полей и методов с модификатором private, лучше оставить их закрытыми и помечать аннотацией, чем делать публичными!</li>
+<li>После загрузки fxml-файла автоматически вызывается метод <code>initialize()</code>. На этот момент все FXML-поля должны быть инициализированы;</li>
+<li>Метод <code>setCellValueFactory(...)</code> определяет, какое поле внутри класса <code>Person</code> будут использоваться для конкретного столбца в таблице. Стрелка <code>-&gt;</code> означает, что мы использовали <strong>лямбда-выражение</strong> из Java 8. (Есть вариант сделать то же самое через <a href="http://docs.oracle.com/javase/8/javafx/api/index.html?javafx/scene/control/cell/PropertyValueFactory.html" title="PropertyValueFactory">PropertyValueFactory</a>, но этот способ нарушает безопасность типов).</li>
 </ul>
+<div class="alert alert-info">
+  <p>
+    В нашем примере для столбцов таблицы мы использовали только значения <code>StringProperty</code>. Если нам понадобится использовать <code>IntegerProperty</code> или <code>DoubleProperty</code>, то <code>setCellValueFactory(...)</code> должен иметь дополнительный метод <code>asObject()</code>:
+  </p>
+  <p>
+  <pre>myIntegerColumn.setCellValueFactory(cellData -&gt; 
+      cellData.getValue().myIntegerProperty().<mark>asObject()</mark>);</pre>
+  </p>
+  <p>
+    Это добавление необходимо сделать из-за неудачного решения при проектировании JavaFX (для подробностей см. <a href="https://community.oracle.com/thread/2575601">это обсуждение</a>).
+  </p>
+</div>
+
+
 <h3 id="-mainapp-personoverviewcontroller">Соединение класса MainApp с классом PersonOverviewController</h3>
-<p>Метод <code>setMainApp(...)</code> должен быть вызван с класса <code>MainApp</code>. Это даст нашему контроллеру доступ к экземпляру <code>MainApp</code>, к коллекции записей <code>personList</code> внутри него и к другим элементам класса. Добавьте в метод <code>showPersonOverview()</code> две дополнительные строки:</p>
+<p>Метод <code>setMainApp(...)</code> должен быть вызван из класса <code>MainApp</code>. Это даст нашему контроллеру доступ к экземпляру <code>MainApp</code>, к коллекции записей <code>personList</code> внутри него и к другим элементам класса. Добавьте в метод <code>showPersonOverview()</code> две дополнительные строки:</p>
 <h5 id="mainapp-java-showpersonoverview-">MainApp.java - метод showPersonOverview()</h5>
 <pre class="prettyprint lang-java">
 /**
- * Shows the person overview inside the root layout.
+ * Показывает в корневом макете сведения об адресатах.
  */
 public void showPersonOverview() {
     try {
-        // Load person overview.
+        // Загружаем сведения об адресатах.
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("view/PersonOverview.fxml"));
         AnchorPane personOverview = (AnchorPane) loader.load();
 
-        // Set person overview into the center of root layout.
+        // Помещаем сведения об адресатах в центр корневого макета.
         rootLayout.setCenter(personOverview);
 
-        // Give the controller access to the main app.
+<mark>        // Даём контроллеру доступ к главному приложению.
         PersonOverviewController controller = loader.getController();
-        controller.setMainApp(this);
+        controller.setMainApp(this);</mark>
 
     } catch (IOException e) {
         e.printStackTrace();
@@ -575,31 +589,32 @@ public void showPersonOverview() {
 
 
 <hr>
-<h2 id="-fxml-">Привязка класса-Контроллера к fxml-файлу</h2>
-<p>Мы подходим к завершению данной части! Но мы пропустили одну маленькую вещь: мы не сказали нашему файлу <code>PersonOverview.fxml</code>, какой контроллер он должен использовать и какие элементы вида каким полям внутри класса-контроллера должны соответствовать. Для этого:</p>
+<h2 id="-fxml-">Привязка класса-контроллера к fxml-файлу</h2>
+<p>Данная часть учебника близится к своему завершению, однако мы пропустили одну маленькую деталь! Мы не сказали файлу <code>PersonOverview.fxml</code>, какой контроллер он должен использовать, а так же не указали соответствие между элементами представления и полями внутри класса-контроллера. Для этого:</p>
 <ol>
 <li><p>Откройте файл <code>PersonOverview.fxml</code> в приложении <em>Scene Builder</em>.</p>
 </li>
 <li><p>Откройте вкладку <em>Controller</em> слева на панели <em>Document</em> и выберите класс <code>PersonControllerOverview</code> в качестве класса-контроллера.<br><img src="/assets/library/javafx-8-tutorial/part2/set-controller-class.png" alt="Set Controller Class" title="Set Controller Class"></p>
 </li>
-<li><p>Выберите компонент <code>TableView</code> на вкладке <em>Hierarchy</em>, перейдите на вкладку <em>Code</em> и установите значение <code>personTable</code> полю <strong>fx:id</strong>.<br><img src="/assets/library/javafx-8-tutorial/part2/set-tableview-fx-id.png" alt="Set TableView fx:id" title="Set TableView fx:id"></p>
+<li><p>Выберите компонент <code>TableView</code> на вкладке <em>Hierarchy</em>, перейдите на вкладку <em>Code</em> и в поле <strong>fx:id</strong> установите значение <code>personTable</code>.<br><img src="/assets/library/javafx-8-tutorial/part2/set-tableview-fx-id.png" alt="Set TableView fx:id" title="Set TableView fx:id"></p>
 </li>
-<li><p>Сделайте то же самое для колонок таблицы и установите значения свойства <strong>fx:id</strong> <code>firstNameColumn</code> и <code>lastNameColumn</code> соответствено.</p>
+<li><p>Сделайте то же самое для колонок таблицы и установите значения свойства <strong>fx:id</strong> <code>firstNameColumn</code> и <code>lastNameColumn</code> соответственно.</p>
 </li>
 <li><p>Для каждой метки во второй колонке компонента GridPane также установите соответствующие значения <strong>fx:id</strong>.<br><img src="/assets/library/javafx-8-tutorial/part2/set-label-fx-id.png" alt="Set Label fx:id" title="Set Label fx:id"></p>
 </li>
-<li><p>Важно: сохрание наш файл <code>PersonOverview.fxml</code>, а потом вернитесь в среду разработки Eclipse и обновите весь проект AdressApp (F5). Это необходимо для того, чтобы приложение Eclipse определило те изменения, которые мы сделали в приложении Scene Builder.</p>
+<li><p>Важно: сохраните файл <code>PersonOverview.fxml</code>, вернитесь в среду разработки Eclipse и обновите весь проект AdressApp (F5). Это необходимо для того, чтобы приложение Eclipse "увидело" те изменения, которые мы сделали в приложении Scene Builder.</p>
 </li>
 </ol>
 <hr>
 <h2 id="-">Запуск приложения</h2>
-<p>Когда вы запустите ваше приложение, вы должны будете увидеть что-то похожее на то, что изображено на картинке вначале данной статьи.</p>
+<p>После запуска приложения мы должны увидеть что-то похожее на то, что изображено на картинке в начале данной статьи.</p>
 <p>Поздравляю!</p>
+<p><em>Примечание: пока ещё при выборе конкретного адресата у нас не обновляются метки. Взаимодействие с пользователем мы будем программировать в следующей части учебника.</em></p>
 <h3 id="-">Что дальше?</h3>
-<p>В <a href="/library/javafx-8-tutorial/ru/part3/" title="Tutorial Part 3">3 Части Учебника</a> мы научим наше приложение добавлять, редактировать и удалять адресные записи.</p>
+<p>В <a href="/library/javafx-8-tutorial/ru/part3/" title="Tutorial Part 3">3-й части учебника</a> мы научим наше приложение добавлять, редактировать и удалять информацию в адресной книге.</p>
 <h5 id="-">Вам могут быть интересны также некоторые другие статьи</h5>
 <ul>
-<li><a href="/blog/javafx-8-dialogs/">JavaFX Dialogs</a></li>
+<li><a href="/blog/javafx-dialogs-official/">JavaFX Dialogs (official)</a></li>
 <li><a href="/blog/javafx-8-date-picker/">JavaFX Date Picker</a></li>
 <li><a href="/blog/javafx-8-event-handling-examples/">JavaFX Event Handling Examples</a></li>
 <li><a href="/blog/javafx-8-tableview-sorting-filtering/">JavaFX TableView Sorting and Filtering</a></li>
@@ -636,7 +651,7 @@ public void showPersonOverview() {
       <a href="/library/javafx-8-tutorial/ru/part6/" data-toggle="tooltip" title="Часть 6: Статистическая диаграмма">6</a>
       </li>
         <li>
-      <a href="/library/javafx-8-tutorial/ru/part7/" data-toggle="tooltip" title="Часть 7: Развертывание">7</a>
+      <a href="/library/javafx-8-tutorial/ru/part7/" data-toggle="tooltip" title="Часть 7: Развёртывание">7</a>
       </li>
     
       </ul>

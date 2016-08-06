@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "JavaFX 8 Tutorial - Part 1: Scene Builder"
+title: "Translate to Turkish--JavaFX 8 Tutorial - Part 1: Scene Builder"
 date: 2014-04-19 01:00
 updated: 2015-05-16 00:00
 slug: javafx-8-tutorial/tr/part1
@@ -52,69 +52,64 @@ languages:
   active: tr
 ---
 
-<div class="alert alert-warning">
-  <i class="fa fa-language"></i> This page needs a Turkish translation. If you'd like to help out please read <a href="/library/how-to-contribute/" class="alert-link">how to contribute</a>.
-</div>
 
 ![Screenshot AddressApp Part 1](/assets/library/javafx-8-tutorial/part1/addressapp-part1.png)
 
-### Topics in Part 1
+### Bölüm 1 Başlıkları
 
-* Getting to know JavaFX
-* Creating and starting a JavaFX Project
-* Using Scene Builder to design the user interface
-* Basic application structure using the Model-View-Controller (MVC) pattern
-
+* JavaFX'i tanıma.
+* JavaFX Projesi oluşturma ve çalıştırma.
+* Scene Builder kullanarak kullanıcı arayüzü oluşturma.
+* Model-View-Controller (MVC) tasarım deseni kullanarak basit bir uygulama yapısı.
 
 *****
 
 
 ### Prerequisites
 
-* Latest [Java JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) (includes **JavaFX 8**).
-* Eclipse 4.4 or greater with e(fx)clipse plugin. The easiest way is to download the preconfigured distro from the [e(fx)clipse website](http://efxclipse.bestsolution.at/install.html#all-in-one). As an alternative you can use an [update site](http://www.eclipse.org/efxclipse/install.html) for your Eclipse installation.
-* [Scene Builder 8.0](http://gluonhq.com/products/scene-builder/) (provided by Gluon because [Oracle only ships it in source code form](http://www.oracle.com/technetwork/java/javase/downloads/sb2download-2177776.html)).
+* Son version [Java JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) (**JavaFX 8** içerir).
+* Eclipse 4.4 veya daha üst versiyonu ile birlikte e(fx)clipse eklentisi. En kolay yol önceden konfigüre edilmiş dağıtımı  [e(fx)clipse website](http://efxclipse.bestsolution.at/install.html#all-in-one) üzerinden indirmektir. Alternatif olarak da Eclipse kurulum dökümanına bakabilirsiniz [update site](http://www.eclipse.org/efxclipse/install.html).
+* [Scene Builder 8.0](http://gluonhq.com/products/scene-builder/) (Gluon tarafından sağlanmaktadır. [Oracle only ships it in source code form](http://www.oracle.com/technetwork/java/javase/downloads/sb2download-2177776.html)).
 
 
-### Eclipse Configurations 
+### Eclipse Konfigürasyonu 
 
-We need to tell Eclipse to use JDK 8 and also where it will find the Scene Builder:
+Eclise'e JDK 8 kullanacağımızı ve Scene Builder'ı nerede bulacağını söylemeliyiz:
 
-1. Open the Eclipse Preferences and navigate to *Java | Installed JREs*.
+1. Eclipse -> Preferences -> Java -> *Java | Installed JREs*.
 
-2. Click *Add...*, select *Standard VM* and choose the installation *Directory* of your JDK 8.
+2. *Add...* tıklayıp, *Standard VM* seçelim ve JDK 8'ın kurulu olduğu *dizini* verelim.
 
-3. Remove the other JREs or JDKs so that the **JDK 8 becomes the default**.   
+3. Diğer JRE veya JDK'ları silelim, böylece **JDK 8 default olarak gelecektir.**
 ![Preferences JDK](/assets/library/javafx-8-tutorial/part1/preferences-jdk.png)
 
-4. Navigate to *Java | Compiler*. Set the **Compiler compliance level to 1.8**.   
+4. *Java | Compiler* sekmesine gidelim. **Compile seviyesini 1.8'e çekelim.**   
 ![Preferences Compliance](/assets/library/javafx-8-tutorial/part1/preferences-compliance.png)
 
-5. Navigate to the *JavaFX* preferences. Specify the path to your Scene Builder executable.   
+5. *JavaFX* sekmesine geçelim. Çalıştırılabilir Scene Builder'ın yolunu verelim.
 ![Preferences JavaFX](/assets/library/javafx-8-tutorial/part1/preferences-javafx.png)
 
 
-### Helpful Links
+### Yardımcı Kaynaklar
 
-You might want to bookmark the following links:
+Tarayıcı yer imlerine eklemek isteyebileceğiniz kaynaklar:
 
-* [Java 8 API](http://docs.oracle.com/javase/8/docs/api/) - JavaDoc for the standard Java classes
-* [JavaFX 8 API](http://docs.oracle.com/javase/8/javafx/api/) - JavaDoc for JavaFX classes
+* [Java 8 API](http://docs.oracle.com/javase/8/docs/api/) - Standart Java için JavaDoc
+* [JavaFX 8 API](http://docs.oracle.com/javase/8/javafx/api/) - JavaFX için JavaDoc
 * [ControlsFX API](http://controlsfx.bitbucket.org/) - JavaDoc for the [ControlsFX project](http://fxexperience.com/controlsfx/) for additional JavaFX controls
 * [Oracle's JavaFX Tutorials](http://docs.oracle.com/javase/8/javafx/get-started-tutorial/get_start_apps.htm) - Official JavaFX Tutorials by Oracle
 
-Now, let's get started!
-
+Şimdi başlayalım.
 
 *****
 
 
-## Create a new JavaFX Project
+## Yeni bir JavaFX Projesi Oluşturma
 
-In Eclipse (with e(fx)clipse installed) go to *File | New | Other...* and choose *JavaFX Project*.   
-Specify the Name of the project (e.g. *AddressApp*) and click *Finish*.
+Eclipse içerisinde(e(fx)clipse yüklü olmalı) *File | New | Other...* kısmından *JavaFX Project*. seçip, projeye bir isim verelim, ardından *Finish* diyerek bitirelim.
 
-Remove the *application* package and its content if it was automatically created.
+Eğer default olarak *application* paketi oluşturuldu ise onu silelim.
+
 
 
 ### Create the Packages
